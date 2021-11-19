@@ -4,7 +4,7 @@
 - Moto Widget app updatable Play Store version by Motorola Mobility LLC.
 
 ## Screenshots
--
+- https://t.me/androidryukimods/292
 
 ## Requirements
 - Android 9 and up
@@ -31,4 +31,4 @@
 - https://www.paypal.me/reiryuki
 
 ## Download
-- 
+- https://www.pling.com/p/1645413/
