@@ -2,6 +2,7 @@
 
 ## Descriptions
 - Moto Widget app updatable Play Store version by Motorola Mobility LLC.
+- It has Google Fit widget also: https://play.google.com/store/apps/details?id=com.google.android.apps.fitness
 
 ## Screenshots
 - https://t.me/androidryukimods/292
