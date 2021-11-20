@@ -19,6 +19,9 @@
 ## Tested on
 - DotOS ROM Android 11 arm64
 
+## Troubleshootings
+- https://t.me/androidryukimodsdiscussions/46628
+
 ## Bug Report
 - https://t.me/androidryukimodsdiscussions/2618
 - If you don't do above, it will be closed immediately
