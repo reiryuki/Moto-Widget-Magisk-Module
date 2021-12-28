@@ -1,8 +1,7 @@
-# Moto Widget Magisk Module
+# Moto Launcher Magisk Module
 
 ## Descriptions
-- Moto Widget app updatable Play Store version by Motorola Mobility LLC.
-- It has Google Fit widget also: https://play.google.com/store/apps/details?id=com.google.android.apps.fitness
+- Moto Launcher and Moto Widget updatable Play Store version by Motorola Mobility LLC.
 
 ## Screenshots
 - https://t.me/androidryukimods/292
@@ -14,7 +13,6 @@
 ## Installation Guide
 - Install this module via Magisk app or Recovery
 - Reboot
-- Open widget and choose any widget from Moto Widget
 
 ## Tested on
 - DotOS ROM Android 11 arm64
