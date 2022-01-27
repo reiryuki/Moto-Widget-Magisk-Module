@@ -7,7 +7,7 @@
 - https://t.me/androidryukimods/292
 
 ## Requirements
-- Android 9 and up
+- Android 10 and up
 - Magisk installed
 
 ## Installation Guide
