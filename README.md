@@ -17,16 +17,16 @@
 ## Tested on
 - DotOS ROM Android 11
 
-## Troubleshootings
+## Troubleshootings & Optionals
 - https://t.me/androidryukimodsdiscussions/46628
 
 ## Bug Report
 - https://t.me/androidryukimodsdiscussions/2618
-- If you don't do above, it will be closed immediately
+- If you don't do above, issues will be closed immediately
 
 ## Credits and contributors
-- Android Ryuki Mods Discussions Team
-- https://t.me/androidryukimodsdiscussions/25188
+- https://t.me/androidryukimodsdiscussions
+- https://t.me/androidappsportdevelopment
 
 ## Thanks for Donations
 - https://t.me/androidryukimodsdiscussions/2619
