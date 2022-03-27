@@ -16,9 +16,12 @@
 
 ## Tested on
 - DotOS ROM Android 11
+- AncientOS ROM Android 12
 
-## Troubleshootings & Optionals
+## Optionals & Troubleshootings
+- https://t.me/androidryukimodsdiscussions/60861
 - https://t.me/androidryukimodsdiscussions/46628
+- https://t.me/androidryukimodsdiscussions/29836
 
 ## Bug Report
 - https://t.me/androidryukimodsdiscussions/2618
