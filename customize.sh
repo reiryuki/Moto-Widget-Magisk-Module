@@ -17,7 +17,7 @@ ui_print " "
 
 # sdk
 NUM=29
-if [ "$API" -lt $NUM ]; then
+if [ $API -lt $NUM ]; then
   ui_print "! Unsupported SDK $API."
   ui_print "  You have to upgrade your Android version"
   ui_print "  at least SDK API $NUM to use this module."
