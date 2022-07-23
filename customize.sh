@@ -79,7 +79,8 @@ NAME=MotoWidget
 conflict
 
 # recents
-if [ "`grep_prop moto.recents $OPTIONALS`" == 1 ]; then
+if [ "`grep_prop moto.recents $OPTIONALS`" == 1 ]\
+&& [ "$API" -le 30 ]; then
   ui_print "- $MODNAME recents provider will be activated"
   NAME="quickstepswitcher quickswitch"
   conflict
