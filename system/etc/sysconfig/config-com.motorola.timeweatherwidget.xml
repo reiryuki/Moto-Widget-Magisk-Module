@@ -3,4 +3,3 @@
     <hidden-api-whitelisted-app package="com.motorola.timeweatherwidget"/>
     <allow-in-power-save package="com.motorola.timeweatherwidget"/>
 </config>
-
