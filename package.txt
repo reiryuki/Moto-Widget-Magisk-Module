@@ -1,0 +1,4 @@
+com.motorola.launcher3
+com.motorola.launcher3.recents.overlay
+com.motorola.launcher3.wallpaper.overlay
+com.motorola.timeweatherwidget

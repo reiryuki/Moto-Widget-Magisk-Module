@@ -1,12 +1,5 @@
-# boot mode
-if [ "$BOOTMODE" != true ]; then
-  abort "- Please flash via Magisk Manager only!"
-fi
-
 # space
-if [ "$BOOTMODE" == true ]; then
-  ui_print " "
-fi
+ui_print " "
 
 # magisk
 if [ -d /sbin/.magisk ]; then
@@ -24,12 +17,23 @@ fi
 SYSTEM=`realpath $MIRROR/system`
 PRODUCT=`realpath $MIRROR/product`
 VENDOR=`realpath $MIRROR/vendor`
-SYSTEM_EXT=`realpath $MIRROR/system/system_ext`
-ODM=`realpath /odm`
-MY_PRODUCT=`realpath /my_product`
+SYSTEM_EXT=`realpath $MIRROR/system_ext`
+if [ -d $MIRROR/odm ]; then
+  ODM=`realpath $MIRROR/odm`
+else
+  ODM=`realpath /odm`
+fi
+if [ -d $MIRROR/my_product ]; then
+  MY_PRODUCT=`realpath $MIRROR/my_product`
+else
+  MY_PRODUCT=`realpath /my_product`
+fi
 
 # optionals
 OPTIONALS=/sdcard/optionals.prop
+if [ ! -f $OPTIONALS ]; then
+  touch $OPTIONALS
+fi
 
 # info
 MODVER=`grep_prop version $MODPATH/module.prop`
@@ -42,7 +46,7 @@ ui_print " MagiskVersionCode=$MAGISK_VER_CODE"
 ui_print " "
 
 # sdk
-NUM=29
+NUM=28
 if [ "$API" -lt $NUM ]; then
   ui_print "! Unsupported SDK $API."
   ui_print "  You have to upgrade your Android version"
@@ -61,13 +65,24 @@ if [ "$BOOTMODE" != true ]; then
   mount -o rw -t auto /dev/block/bootdevice/by-name/metadata /metadata
 fi
 
-# sepolicy.rule
-FILE=$MODPATH/sepolicy.sh
-DES=$MODPATH/sepolicy.rule
-if [ -f $FILE ] && [ "`grep_prop sepolicy.sh $OPTIONALS`" != 1 ]; then
+# sepolicy
+FILE=$MODPATH/sepolicy.rule
+DES=$MODPATH/sepolicy.pfsd
+if [ "`grep_prop sepolicy.sh $OPTIONALS`" == 1 ]\
+&& [ -f $FILE ]; then
   mv -f $FILE $DES
-  sed -i 's/magiskpolicy --live "//g' $DES
-  sed -i 's/"//g' $DES
+fi
+
+# motocore
+if [ ! -d /data/adb/modules_update/MotoCore ]\
+&& [ ! -d /data/adb/modules/MotoCore ]; then
+  ui_print "- This module requires Moto Core Magisk Module installed"
+  ui_print "  except you are in Motorola ROM."
+  ui_print "  Please read the installation guide!"
+  ui_print " "
+else
+  rm -f /data/adb/modules/MotoCore/remove
+  rm -f /data/adb/modules/MotoCore/disable
 fi
 
 # function
@@ -99,35 +114,32 @@ NAME=MotoWidget
 conflict
 
 # recents
-if [ "`grep_prop moto.recents $OPTIONALS`" == 1 ]\
-&& [ "$API" -le 30 ]; then
-  ui_print "- $MODNAME recents provider will be activated"
-  NAME="quickstepswitcher quickswitch"
-  conflict
+if [ "`grep_prop moto.recents $OPTIONALS`" == 1 ]; then
+  RECENTS=true
+  ui_print "- Recents provider will be activated"
+  ui_print "  Quick Switch module will be disabled"
+  touch /data/adb/modules/quickstepswitcher/disable
+  touch /data/adb/modules/quickswitch/disable
   sed -i 's/#r//g' $MODPATH/post-fs-data.sh
   ui_print " "
 else
-  rm -rf $MODPATH/system/product/overlay/Launcher3QuickStepRecentsOverlay
+  RECENTS=false
+  rm -rf $MODPATH/system/product/overlay/MotoLauncher3QuickStepRecentsOverlay
 fi
-
 # com.android.wallpaper
 if ! appops get com.android.wallpaper > /dev/null 2>&1; then
-  rm -rf $MODPATH/system/product/overlay/Launcher3QuickStepWallpaperOverlay
-  if [ "`grep_prop moto.recents $OPTIONALS`" != 1 ]; then
+  rm -rf $MODPATH/system/product/overlay/MotoLauncher3QuickStepWallpaperOverlay
+  if [ $RECENTS == false ]; then
     rm -rf $MODPATH/system/product
   fi
 fi
 
 # cleaning
 ui_print "- Cleaning..."
-PKG="com.motorola.launcher3
-     com.motorola.timeweatherwidget
-     com.motorola.motosignature.app
-     com.motorola.android.providers.settings"
+PKG=`cat $MODPATH/package.txt`
 if [ "$BOOTMODE" == true ]; then
-  PKG2=`echo $PKG | sed 's/com.motorola.timeweatherwidget//'`
-  for PKG2S in $PKG2; do
-    RES=`pm uninstall $PKG2S`
+  for PKGS in $PKG; do
+    RES=`pm uninstall $PKGS 2>/dev/null`
   done
 fi
 rm -rf /metadata/magisk/$MODID
@@ -136,7 +148,6 @@ rm -rf /persist/magisk/$MODID
 rm -rf /data/unencrypted/magisk/$MODID
 rm -rf /cache/magisk/$MODID
 ui_print " "
-
 # power save
 FILE=$MODPATH/system/etc/sysconfig/*
 if [ "`grep_prop power.save $OPTIONALS`" == 1 ]; then
@@ -228,14 +239,20 @@ done
 APP="`ls $MODPATH/system/priv-app` `ls $MODPATH/system/app`"
 hide_oat
 
-# feature
+# function
+check_feature() {
 NAME=com.motorola.timeweatherwidget
-if ! pm list features | grep -Eq $NAME; then
-  echo 'rm -rf /data/user/*/com.android.vending/*' >> $MODPATH/cleaner.sh
-  ui_print "- Play Store data will be cleared automatically on"
-  ui_print "  next reboot for app updates"
+if [ "$BOOTMODE" == true ]\
+&& ! pm list features | grep -Eq $NAME; then
+  echo 'rm -rf /data/user*/*/com.android.vending/*' >> $MODPATH/cleaner.sh
+  ui_print "- Play Store data will be cleared automatically on the next"
+  ui_print "  reboot"
   ui_print " "
 fi
+}
+
+
+
 
 
 

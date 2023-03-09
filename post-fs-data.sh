@@ -6,18 +6,17 @@ exec 2>$MODPATH/debug-pfsd.log
 set -x
 
 # run
-FILE=$MODPATH/sepolicy.sh
+FILE=$MODPATH/sepolicy.pfsd
 if [ -f $FILE ]; then
-  . $FILE
+  magiskpolicy --live --apply $FILE
 fi
 
 # context
 chcon -R u:object_r:vendor_overlay_file:s0 $MODPATH/system/product/overlay
 
 # conflict
-rm -f /data/adb/modules/*/system/app/MotoSignatureApp/.replace
-#rtouch /data/adb/modules/quickstepswitcher/remove
-#rtouch /data/adb/modules/quickswitch/remove
+#rtouch /data/adb/modules/quickstepswitcher/disable
+#rtouch /data/adb/modules/quickswitch/disable
 
 # cleaning
 FILE=$MODPATH/cleaner.sh
