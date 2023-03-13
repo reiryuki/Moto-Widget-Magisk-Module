@@ -83,9 +83,24 @@ if ! dumpsys package $PKG | grep "$NAME: granted=true"; then
 fi
 PKGOPS=`appops get $PKG`
 UIDOPS=`appops get --uid $UID`
+# function
+stop_log() {
+FILE=$MODPATH/debug.log
+SIZE=`du $FILE | sed "s|$FILE||"`
+if [ "$LOG" != stopped ] && [ "$SIZE" -gt 7 ]; then
+  exec 2>/dev/null
+  LOG=stopped
+fi
+}
+start_service() {
+stop_log
+sleep 60
 am start-service $PKG/com.motorola.commandcenter.WidgetService
-
-
+start_service
+}
+# service
+am start-service $PKG/com.motorola.commandcenter.WidgetService
+start_service
 
 
 
