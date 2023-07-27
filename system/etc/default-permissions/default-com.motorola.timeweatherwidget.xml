@@ -1,8 +1,10 @@
 <?xml version='1.0' encoding='utf-8' standalone='yes' ?>
 <exceptions>
-    <exception package="com.motorola.launcher3">
-        <permission name="android.permission.READ_PHONE_STATE" fixed="false"/>
-        <permission name="android.permission.CALL_PHONE" fixed="false"/>
+    <exception package="com.motorola.timeweatherwidget">
+        <permission name="android.permission.POST_NOTIFICATIONS" fixed="false"/>
+        <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="false"/>
+        <permission name="android.permission.ACCESS_COARSE_LOCATION" fixed="false"/>
+        <permission name="android.permission.ACCESS_BACKGROUND_LOCATION" fixed="false"/>
         <permission name="android.permission.READ_EXTERNAL_STORAGE" fixed="false"/>
         <permission name="android.permission.WRITE_EXTERNAL_STORAGE" fixed="false"/>
         <permission name="android.permission.ACCESS_MEDIA_LOCATION" fixed="false"/>
