@@ -1,8 +1,8 @@
-id=MotoLauncher
-name=Moto Launcher & Widget
-version=v1.9
-versionCode=9
+id=MotoWidget
+name=Moto Widget & Launcher
+version=v1.10
+versionCode=10
 author=Rei Ryuki the Fixer
-description=Moto Launcher and Moto Widget by Motorola Mobility LLC. for any Android 9 and up.
+description=Moto Widget by Motorola Mobility LLC. ported for any Android 9 and up and Moto Launcher for any Android 9 until 12.1.
 
 

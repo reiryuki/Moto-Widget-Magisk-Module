@@ -1,38 +1,40 @@
-# Moto Launcher & Widget Magisk Module
+# Moto Widget & Launcher Magisk Module
 
 ## DISCLAIMER
 - Moto apps and blobs are owned by Motorola™.
-- The MIT license specified here is for the Magisk Module, not for Moto apps and blobs.
+- The MIT license specified here is for the Magisk Module only, not for Moto apps and blobs.
 
 ## Descriptions
-- Moto Launcher and Moto Widget by Motorola Mobility LLC. ported and integrated as a Magisk Module for all supported and rooted devices with Magisk
+- Moto Widget and Moto Launcher by Motorola Mobility LLC. ported and integrated as a Magisk Module for all supported and rooted devices with Magisk
 
 ## Sources
+- TimerWidget.apk: https://apkmirror.com com.motorola.timeweatherwidget by Motorola Mobility LLC.
 - MotoLauncher3QuickStep.apk: Launcher3QuickStep.apk https://dumps.tadiphone.dev/dumps/motorola/nio msi_prc-user-11-RRN31.Q3-1-11-1-919e2-release-keys
-- TimerWidget.apk: https://play.google.com/store/apps/details?id=com.motorola.timeweatherwidget
 
 ## Screenshots
 - https://t.me/androidryukimods/292
 
 ## Requirements
-- Android 9 and up
-- Magisk installed
+- Android 9 and up for Moto Widget
+- Android 9 until 12.1 for Moto Launcher
+- Magisk or KernelSU installed
 - Moto Core Magisk Module installed https://github.com/reiryuki/Moto-Core-Magisk-Module
 
 ## Installation Guide & Download Link
 - Install Moto Core Magisk Module first: https://github.com/reiryuki/Moto-Core-Magisk-Module
-- Install this module https://www.pling.com/p/1645413/ via Magisk app or Recovery
+- Install this module https://www.pling.com/p/1645413/ via Magisk app or KernelSU app only
 - Reboot
+- If you are using KernelSU, you need to allow superuser list manually all package name listed in package.txt (and your home launcher app also) (enable show system apps) and reboot after
 - Go to app info of Moto Widget and allow the network access
 - Change your default home to Moto Launcher
+- Change home screen layout to 5 rows for any other else home launcher
 - Add Moto Widget to your home
 
 ## Tested on
 - Android 11 DotOS ROM
 - Android 12 AncientOS ROM
 - Android 12.1 Nusantara ROM
-- Android 13 AOSP ROM
-- Android 13 CrDroid ROM
+- Android 13 AOSP ROM & CrDroid ROM
 
 ## Optionals & Troubleshootings
 - https://t.me/androidryukimodsdiscussions/60861
