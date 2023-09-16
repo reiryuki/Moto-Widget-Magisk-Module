@@ -1,6 +1,6 @@
 # boot mode
 if [ "$BOOTMODE" != true ]; then
-  abort "- Please flash via Magisk app only!"
+  abort "- Please install via Magisk/KernelSU app only!"
 fi
 
 # space
@@ -36,19 +36,11 @@ ui_print " "
 
 # sdk
 NUM=28
-LAUNCHER=true
 if [ "$API" -lt $NUM ]; then
   ui_print "! Unsupported SDK $API."
   ui_print "  You have to upgrade your Android version"
   ui_print "  at least SDK API $NUM to use this module."
   abort
-elif [ "$API" -ge 33 ]; then
-  ui_print "- SDK $API"
-  ui_print "  Moto Launcher is unsupported in Android 13"
-  rm -rf $MODPATH/system/priv-app/MotoLauncher3QuickStep\
-   $MODPATH/system/product/overlay/MotoLauncher3QuickStepRecentsOverlay
-  LAUNCHER=false
-  ui_print " "
 elif [ "$API" -ge 31 ]; then
   ui_print "- SDK $API"
   cp -rf $MODPATH/system_12/* $MODPATH/system
@@ -62,10 +54,9 @@ rm -rf $MODPATH/system_12
 # motocore
 if [ ! -d /data/adb/modules_update/MotoCore ]\
 && [ ! -d /data/adb/modules/MotoCore ]; then
-  ui_print "- This module requires Moto Core Magisk Module installed"
-  ui_print "  except you are in Motorola ROM."
+  ui_print "- This module requires Moto Core Magisk Module installed."
   ui_print "  Please read the installation guide!"
-  ui_print " "
+  abort
 else
   rm -f /data/adb/modules/MotoCore/remove
   rm -f /data/adb/modules/MotoCore/disable
@@ -114,26 +105,63 @@ done
 NAMES=MotoLauncher
 conflict
 
+# function
+check_permission() {
+if ! pm list package | grep -q $PKG; then
+  ui_print "- Checking $NAME"
+  ui_print "  of $PKG..."
+  FILE=`find $MODPATH/system -type f -name $APP.apk`
+  RES=`pm install -g -i com.android.vending $FILE 2>/dev/null`
+  if pm list package | grep -q $PKG; then
+    if ! dumpsys package $PKG | grep -q "$NAME: granted=true"; then
+      ui_print "  ! You need to disable your Android Signature Verification"
+      ui_print "    first to use this recents provider, otherwise it will crash."
+      RES=`pm uninstall $PKG 2>/dev/null`
+      RECENTS=false
+      ui_print "  Changing moto.recents to 0"
+      sed -i 's|^moto.recents=1|moto.recents=0|g' $OPTIONALS
+    fi
+  else
+    ui_print "  ! Failed."
+    ui_print "    Maybe insufficient storage."
+    RECENTS=false
+  fi
+  ui_print " "
+fi
+}
+
 # recents
-if [ "$LAUNCHER" == true ]\
-&& [ "`grep_prop moto.recents $OPTIONALS`" == 1 ]; then
+if [ "`grep_prop moto.recents $OPTIONALS`" == 1 ]; then
   RECENTS=true
-  ui_print "- Recents provider will be activated"
+  if [ "$API" -lt 30 ]; then
+    ui_print "- $MODNAME recents provider doesn't support the current Android version"
+    RECENTS=false
+    ui_print " "
+  elif [ "$API" -ge 30 ] && [ "$API" -le 32 ]; then
+    APP=MotoLauncher3QuickStep
+    PKG=com.motorola.launcher3
+    NAME=android.permission.MONITOR_INPUT
+    if [ "$BOOTMODE" == true ]; then
+      check_permission
+    fi
+  fi
+else
+  RECENTS=false
+fi
+if [ "$RECENTS" == true ]; then
+  ui_print "- $MODNAME recents provider will be activated"
   ui_print "  Quick Switch module will be disabled"
   touch /data/adb/modules/quickstepswitcher/disable
   touch /data/adb/modules/quickswitch/disable
-  sed -i 's/#r//g' $MODPATH/post-fs-data.sh
+  sed -i 's|#r||g' $MODPATH/post-fs-data.sh
   ui_print " "
 else
-  RECENTS=false
-  rm -rf $MODPATH/system/product/overlay/MotoLauncher3QuickStepRecentsOverlay
+  rm -rf $MODPATH/system/product
 fi
-# com.android.wallpaper
-if ! appops get com.android.wallpaper > /dev/null 2>&1; then
-  rm -rf $MODPATH/system/product/overlay/MotoLauncher3QuickStepWallpaperOverlay
-  if [ "$RECENTS" == false ]; then
-    rm -rf $MODPATH/system/product
-  fi
+if [ "$RECENTS" == true ] && [ ! -d /product/overlay ]; then
+  ui_print "- Using /vendor/overlay/ instead of /product/overlay/"
+  mv -f $MODPATH/system/product $MODPATH/system/vendor
+  ui_print " "
 fi
 
 # cleaning
@@ -152,8 +180,8 @@ if [ "`grep_prop power.save $OPTIONALS`" == 1 ]; then
   ui_print "- $MODNAME will not be allowed in power save."
   ui_print "  It may save your battery but decreasing $MODNAME performance."
   for PKG in $PKGS; do
-    sed -i "s/<allow-in-power-save package=\"$PKG\"\/>//g" $FILE
-    sed -i "s/<allow-in-power-save package=\"$PKG\" \/>//g" $FILE
+    sed -i "s|<allow-in-power-save package=\"$PKG\"/>||g" $FILE
+    sed -i "s|<allow-in-power-save package=\"$PKG\" />||g" $FILE
   done
   ui_print " "
 fi
@@ -235,13 +263,6 @@ done
 # hide
 APPS="`ls $MODPATH/system/priv-app` `ls $MODPATH/system/app`"
 hide_oat
-
-# overlay
-if [ "$RECENTS" == true ] && [ ! -d /product/overlay ]; then
-  ui_print "- Using /vendor/overlay/ instead of /product/overlay/"
-  mv -f $MODPATH/system/product $MODPATH/system/vendor
-  ui_print " "
-fi
 
 # function
 check_feature() {

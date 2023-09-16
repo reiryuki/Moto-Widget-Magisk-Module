@@ -8,20 +8,20 @@
 - Moto Widget and Moto Launcher by Motorola Mobility LLC. ported and integrated as a Magisk Module for all supported and rooted devices with Magisk
 
 ## Sources
-- TimerWidget.apk: https://apkmirror.com com.motorola.timeweatherwidget by Motorola Mobility LLC.
+- TimeWeather.apk: https://apkmirror.com com.motorola.timeweatherwidget by Motorola Mobility LLC.
 - MotoLauncher3QuickStep.apk: Launcher3QuickStep.apk https://dumps.tadiphone.dev/dumps/motorola/nio msi_prc-user-11-RRN31.Q3-1-11-1-919e2-release-keys
 
 ## Screenshots
 - https://t.me/androidryukimods/292
 
 ## Requirements
-- Android 9 and up for Moto Widget
-- Android 9 until 12.1 for Moto Launcher
+- Android 9 and up
 - Magisk or KernelSU installed
 - Moto Core Magisk Module installed https://github.com/reiryuki/Moto-Core-Magisk-Module
 
 ## Installation Guide & Download Link
 - Install Moto Core Magisk Module first: https://github.com/reiryuki/Moto-Core-Magisk-Module
+- If you want to activate the recents provider, READ Optionals bellow!
 - Install this module https://www.pling.com/p/1645413/ via Magisk app or KernelSU app only
 - Reboot
 - If you are using KernelSU, you need to allow superuser list manually all package name listed in package.txt (and your home launcher app also) (enable show system apps) and reboot after
@@ -41,6 +41,11 @@
 - https://t.me/androidryukimodsdiscussions/46628
 - https://t.me/androidryukimodsdiscussions/29836
 
+## Known Issues
+- Recents split screen is only working in Android 12 and 11
+- Recents screenshot button is only working in Android 11
+- Recents Edge display doesn't work
+
 ## Support & Bug Report
 - https://t.me/androidryukimodsdiscussions/2618
 - If you don't do above, issues will be closed immediately
@@ -50,7 +55,7 @@
 - You can contribute ideas about this Magisk Module here: https://t.me/androidappsportdevelopment
 
 ## Thanks for Donations
-- This Magisk Module is always will be free but you can however show us that you are care by making a donations:
+This Magisk Module is always will be free but you can however show us that you are care by making a donations:
 - https://ko-fi.com/reiryuki
 - https://www.paypal.me/reiryuki
 - https://t.me/androidryukimodsdiscussions/2619

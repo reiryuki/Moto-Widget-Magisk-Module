@@ -1,9 +1,11 @@
 MODPATH=${0%/*}
-API=`getprop ro.build.version.sdk`
 
 # log
 exec 2>$MODPATH/debug.log
 set -x
+
+# var
+API=`getprop ro.build.version.sdk`
 
 # wait
 until [ "`getprop sys.boot_completed`" == "1" ]; do
@@ -78,7 +80,9 @@ fi
 
 # grant
 PKG=com.motorola.timeweatherwidget
-pm grant $PKG android.permission.POST_NOTIFICATIONS
+if [ "$API" -ge 33 ]; then
+  pm grant $PKG android.permission.POST_NOTIFICATIONS
+fi
 pm grant $PKG android.permission.ACCESS_FINE_LOCATION
 pm grant $PKG android.permission.ACCESS_COARSE_LOCATION
 pm grant $PKG android.permission.ACCESS_BACKGROUND_LOCATION
