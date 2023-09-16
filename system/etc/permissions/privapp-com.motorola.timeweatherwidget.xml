@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <permissions>
     <privapp-permissions package="com.motorola.timeweatherwidget">
-        <permission name="android.permission.WRITE_MEDIA_STORAGE"/>
+        <permission name="com.android.launcher3.permission.READ_SETTINGS"/>
+        <permission name="com.android.launcher3.permission.WRITE_SETTINGS"/>
     </privapp-permissions>
 </permissions>
