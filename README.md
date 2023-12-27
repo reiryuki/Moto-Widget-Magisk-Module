@@ -37,14 +37,15 @@
 - Android 13 AOSP ROM & CrDroid ROM
 
 ## Optionals & Troubleshootings
-- https://t.me/androidryukimodsdiscussions/60861
 - https://t.me/androidryukimodsdiscussions/46628
-- https://t.me/androidryukimodsdiscussions/29836
+- Global: https://t.me/androidryukimodsdiscussions/60861
+- Global: https://t.me/androidryukimodsdiscussions/29836
 
 ## Known Issues
 - Recents split screen is only working in Android 12 and 11
 - Recents screenshot button is only working in Android 11
 - Recents Edge display doesn't work
+- Recents swipe-up doesn't work if using gesture navigations
 
 ## Support & Bug Report
 - https://t.me/androidryukimodsdiscussions/2618

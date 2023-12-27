@@ -1,7 +1,8 @@
 MODPATH=${0%/*}
 
 # log
-exec 2>$MODPATH/debug.log
+LOGFILE=$MODPATH/debug.log
+exec 2>$LOGFILE
 set -x
 
 # var
@@ -45,7 +46,7 @@ if [ "$API" -ge 31 ]; then
 fi
 PKGOPS=`appops get $PKG`
 UID=`dumpsys package $PKG 2>/dev/null | grep -m 1 userId= | sed 's|    userId=||g'`
-if [ "$UID" -gt 9999 ]; then
+if [ "$UID" ] && [ "$UID" -gt 9999 ]; then
   appops set --uid "$UID" LEGACY_STORAGE allow
   if [ "$API" -ge 29 ]; then
     appops set --uid "$UID" ACCESS_MEDIA_LOCATION allow
@@ -56,7 +57,7 @@ fi
 
 # grant
 PKG=com.motorola.launcher3
-if pm list packages | grep $PKG; then
+if appops get $PKG > /dev/null 2>&1; then
   pm grant $PKG android.permission.READ_EXTERNAL_STORAGE
   pm grant $PKG android.permission.WRITE_EXTERNAL_STORAGE
   pm grant $PKG android.permission.READ_PHONE_STATE
@@ -73,7 +74,7 @@ if pm list packages | grep $PKG; then
   fi
   PKGOPS=`appops get $PKG`
   UID=`dumpsys package $PKG 2>/dev/null | grep -m 1 userId= | sed 's|    userId=||g'`
-  if [ "$UID" -gt 9999 ]; then
+  if [ "$UID" ] && [ "$UID" -gt 9999 ]; then
     UIDOPS=`appops get --uid "$UID"`
   fi
 fi
@@ -96,21 +97,22 @@ fi
 grant_permission
 # function
 stop_log() {
-FILE=$MODPATH/debug.log
-SIZE=`du $FILE | sed "s|$FILE||g"`
+SIZE=`du $LOGFILE | sed "s|$LOGFILE||g"`
 if [ "$LOG" != stopped ] && [ "$SIZE" -gt 25 ]; then
   exec 2>/dev/null
+  set +x
   LOG=stopped
 fi
 }
 start_service() {
 stop_log
 sleep 60
-am start-service $PKG/com.motorola.commandcenter.WidgetService
+am start-service $SERVICE
 start_service
 }
 # service
-am start-service $PKG/com.motorola.commandcenter.WidgetService
+SERVICE=$PKG/com.motorola.commandcenter.WidgetService
+am start-service $SERVICE
 start_service
 
 
