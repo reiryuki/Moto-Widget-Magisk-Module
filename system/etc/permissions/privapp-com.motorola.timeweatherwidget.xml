@@ -1,7 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <permissions>
     <privapp-permissions package="com.motorola.timeweatherwidget">
+        <permission name="android.permission.SCHEDULE_EXACT_ALARM"/>
+        <permission name="com.motorola.permission.ACCESS_CHECKIN"/>
+        <permission name="com.motorola.permission.BIND_EXPERIENCE"/>
+        <permission name="com.motorola.myscreen.permission.ACCESS_MYSCREEN"/>
         <permission name="com.android.launcher3.permission.READ_SETTINGS"/>
         <permission name="com.android.launcher3.permission.WRITE_SETTINGS"/>
+        <permission name="com.motorola.launcher3.permission.READ_SETTINGS"/>
+        <permission name="com.motorola.launcher3.permission.WRITE_SETTINGS"/>
+        <permission name="com.motorola.launcher3.permission.SEND_GRID_CHANGE_BROADCASTS"/>
+        <permission name="com.motorola.launcher3.permission.RECEIVE_GRID_CHANGE_BROADCASTS"/>
+        <permission name="com.motorola.launcher3.permission.SEND_WALLPAPER_THEME_CHANGE_BROADCASTS"/>
+        <permission name="com.motorola.launcher3.permission.RECEIVE_WALLPAPER_THEME_CHANGE_BROADCASTS"/>
+        <!-- Not added yet in AndroidManifest.xml -->
+        <permission name="android.permission.SYSTEM_ALERT_WINDOW"/>
+        <permission name="android.permission.ACCESS_SURFACE_FLINGER"/>
+        <permission name="android.permission.ROTATE_SURFACE_FLINGER"/>
+        <permission name="android.permission.INTERNAL_SYSTEM_WINDOW"/>
+        <permission name="android.permission.READ_CALENDAR"/>
+        <permission name="android.permission.WRITE_CALENDAR"/>
+        <permission name="android.permission.READ_DEVICE_CONFIG"/>
     </privapp-permissions>
 </permissions>
+
+
