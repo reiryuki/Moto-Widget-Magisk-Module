@@ -45,7 +45,7 @@ pm grant $PKG android.permission.WRITE_CALENDAR
 pm grant $PKG android.permission.ACCESS_FINE_LOCATION
 pm grant $PKG android.permission.ACCESS_COARSE_LOCATION
 pm grant $PKG android.permission.ACCESS_BACKGROUND_LOCATION
-pm grant $PKG android.permission.READ_EXTERNAL_STORAGE
+pm grant $PKG android.permission.READ_EXTERNAL_STORAGE 2>/dev/null
 APP=TimeWeather
 NAME=android.permission.ACCESS_BACKGROUND_LOCATION
 if ! dumpsys package $PKG | grep "$NAME: granted=true"; then
