@@ -40,8 +40,8 @@ if [ "$API" -ge 33 ]; then
   pm grant $PKG android.permission.POST_NOTIFICATIONS
   appops set $PKG ACCESS_RESTRICTED_SETTINGS allow
 fi
-pm grant $PKG android.permission.READ_CALENDAR
-pm grant $PKG android.permission.WRITE_CALENDAR
+pm grant $PKG android.permission.READ_CALENDAR 2>/dev/null
+pm grant $PKG android.permission.WRITE_CALENDAR 2>/dev/null
 pm grant $PKG android.permission.ACCESS_FINE_LOCATION
 pm grant $PKG android.permission.ACCESS_COARSE_LOCATION
 pm grant $PKG android.permission.ACCESS_BACKGROUND_LOCATION
