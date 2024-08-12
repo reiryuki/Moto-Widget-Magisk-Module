@@ -1,8 +1,8 @@
 id=MotoWidget
-name=Moto Widget & Launcher
-version=v1.12-R
-versionCode=12
+name=Moto Widget Min-30
+version=v1.13
+versionCode=13
 author=Rei Ryuki the Fixer
-description=Moto Widget and Moto Launcher by Motorola Mobility LLC. ported for any Android 9 and up.
+description=Widgets app by Motorola Mobility LLC. ported for any Android 11 (SDK 30) and up.
 
 

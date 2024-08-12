@@ -1,6 +1,6 @@
 # function
 remove_cache() {
-FILES=`find $MODPATH -type f -name *.apk | sed -e 's|.apk||g' -e 's|Moto||g'`
+FILES=`find $MODPATH -type f -name *.apk | sed 's|.apk||g'`
 APPS=`for FILE in $FILES; do basename $FILE; done`
 for APP in $APPS; do
   rm -f `find /data/system/package_cache\
