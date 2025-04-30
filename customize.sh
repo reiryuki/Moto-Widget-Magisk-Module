@@ -53,7 +53,7 @@ fi
 ui_print " "
 
 # sdk
-NUM=33
+NUM=30
 if [ "$API" -lt $NUM ]; then
   ui_print "! Unsupported SDK $API."
   ui_print "  You have to upgrade your Android version"
@@ -146,7 +146,7 @@ if [ "`grep_prop data.cleanup $OPTIONALS`" == 1 ]; then
   ui_print " "
 elif [ -d $DIR ]\
 && [ "$PREVMODNAME" != "$MODNAME" ]; then
-  ui_print "- Different version detected"
+  ui_print "- Different module name is detected"
   ui_print "  Cleaning-up $MODID data..."
   cleanup
   ui_print " "
@@ -165,17 +165,16 @@ APPS="`ls $MODPATH/system/priv-app`
       `ls $MODPATH/system/app`"
 hide_oat
 
-# function
-check_feature() {
+# check
 NAME=com.motorola.timeweatherwidget
 if [ "$BOOTMODE" == true ]\
-&& ! pm list features | grep -q $NAME; then
+&& [ "`pm has-feature $NAME`" != true ]; then
   echo 'rm -rf /data/user*/"$UID"/com.android.vending/*' >> $MODPATH/cleaner.sh
   ui_print "- Play Store data will be cleared automatically"
   ui_print "  on the next reboot"
   ui_print " "
 fi
-}
+
 
 
 

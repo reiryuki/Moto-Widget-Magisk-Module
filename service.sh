@@ -32,26 +32,27 @@ fi
 
 # grant
 PKG=com.motorola.timeweatherwidget
-appops set $PKG SYSTEM_ALERT_WINDOW allow
-if [ "$API" -ge 30 ]; then
-  appops set $PKG AUTO_REVOKE_PERMISSIONS_IF_UNUSED ignore
-fi
-if [ "$API" -ge 33 ]; then
-  pm grant $PKG android.permission.POST_NOTIFICATIONS
-  appops set $PKG ACCESS_RESTRICTED_SETTINGS allow
-fi
-pm grant $PKG android.permission.READ_CALENDAR 2>/dev/null
-pm grant $PKG android.permission.WRITE_CALENDAR 2>/dev/null
-pm grant $PKG android.permission.ACCESS_FINE_LOCATION
-pm grant $PKG android.permission.ACCESS_COARSE_LOCATION
-pm grant $PKG android.permission.ACCESS_BACKGROUND_LOCATION
-pm grant $PKG android.permission.READ_EXTERNAL_STORAGE 2>/dev/null
-APP=TimeWeather
-NAME=android.permission.ACCESS_BACKGROUND_LOCATION
-if ! dumpsys package $PKG | grep "$NAME: granted=true"; then
-  FILE=`find $MODPATH/system -type f -name $APP.apk`
-  pm install -g -i com.android.vending $FILE
-  pm uninstall -k $PKG
+if appops get $PKG > /dev/null 2>&1; then
+  pm grant --all-permissions $PKG
+  appops set $PKG SYSTEM_ALERT_WINDOW allow
+  if [ "$API" -ge 30 ]; then
+    appops set $PKG AUTO_REVOKE_PERMISSIONS_IF_UNUSED ignore
+  fi
+  if [ "$API" -ge 33 ]; then
+    appops set $PKG ACCESS_RESTRICTED_SETTINGS allow
+  fi
+  APP=TimeWeather
+  NAME=android.permission.ACCESS_BACKGROUND_LOCATION
+  if ! dumpsys package $PKG | grep "$NAME: granted=true"; then
+    FILE=`find $MODPATH/system -type f -name $APP.apk`
+    pm install -g -i com.android.vending $FILE
+    pm uninstall -k $PKG
+  fi
+  PKGOPS=`appops get $PKG`
+  UID=`dumpsys package $PKG 2>/dev/null | grep -m 1 Id= | sed -e 's|    userId=||g' -e 's|    appId=||g'`
+  if [ "$UID" ] && [ "$UID" -gt 9999 ]; then
+    UIDOPS=`appops get --uid "$UID"`
+  fi
 fi
 # function
 stop_log() {
@@ -64,7 +65,7 @@ fi
 }
 start_service() {
 stop_log
-sleep 60
+sleep 300
 am start-service $SERVICE
 start_service
 }
