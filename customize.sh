@@ -144,12 +144,12 @@ if [ "`grep_prop data.cleanup $OPTIONALS`" == 1 ]; then
   ui_print "- Cleaning-up $MODID data..."
   cleanup
   ui_print " "
-elif [ -d $DIR ]\
-&& [ "$PREVMODNAME" != "$MODNAME" ]; then
-  ui_print "- Different module name is detected"
-  ui_print "  Cleaning-up $MODID data..."
-  cleanup
-  ui_print " "
+#elif [ -d $DIR ]\
+#&& [ "$PREVMODNAME" != "$MODNAME" ]; then
+#  ui_print "- Different module name is detected"
+#  ui_print "  Cleaning-up $MODID data..."
+#  cleanup
+#  ui_print " "
 fi
 
 # function
