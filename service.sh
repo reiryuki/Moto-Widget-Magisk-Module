@@ -15,7 +15,8 @@ done
 
 # list
 PKGS="`cat $MODPATH/package.txt`
-       com.motorola.timeweatherwidget:another"
+       com.motorola.timeweatherwidget:another
+       com.motorola.timeweatherwidget:dna_config_builder"
 for PKG in $PKGS; do
   magisk --denylist rm $PKG 2>/dev/null
   magisk --sulist add $PKG 2>/dev/null
@@ -32,7 +33,7 @@ fi
 
 # grant
 PKG=com.motorola.timeweatherwidget
-if appops get $PKG > /dev/null 2>&1; then
+if appops get $PKG >/dev/null 2>&1; then
   pm grant --all-permissions $PKG
   appops set $PKG SYSTEM_ALERT_WINDOW allow
   if [ "$API" -ge 30 ]; then
@@ -41,15 +42,8 @@ if appops get $PKG > /dev/null 2>&1; then
   if [ "$API" -ge 33 ]; then
     appops set $PKG ACCESS_RESTRICTED_SETTINGS allow
   fi
-  APP=TimeWeather
-  NAME=android.permission.ACCESS_BACKGROUND_LOCATION
-  if ! dumpsys package $PKG | grep "$NAME: granted=true"; then
-    FILE=`find $MODPATH/system -type f -name $APP.apk`
-    pm install -g -i com.android.vending $FILE
-    pm uninstall -k $PKG
-  fi
   PKGOPS=`appops get $PKG`
-  UID=`dumpsys package $PKG 2>/dev/null | grep -m 1 Id= | sed -e 's|    userId=||g' -e 's|    appId=||g'`
+  UID=`grep "^$PKG " /data/system/packages.list | awk '{print $2}'`
   if [ "$UID" ] && [ "$UID" -gt 9999 ]; then
     UIDOPS=`appops get --uid "$UID"`
   fi

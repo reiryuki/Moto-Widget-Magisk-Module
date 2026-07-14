@@ -95,7 +95,8 @@ for NAME in $NAMES; do
    /persist/magisk/$NAME\
    /data/unencrypted/magisk/$NAME\
    /cache/magisk/$NAME\
-   /cust/magisk/$NAME
+   /cust/magisk/$NAME\
+   /klogdump/magisk/$NAME
 done
 }
 
@@ -174,7 +175,12 @@ if [ "$BOOTMODE" == true ]\
   ui_print "  on the next reboot"
   ui_print " "
 fi
-
+# prepare
+DIR=/storage/emulated/"$UID"/Android/data/$NAME/files
+ui_print "- Creating directories:"
+ui_print "  $DIR"
+mkdir -p $DIR
+ui_print " "
 
 
 
