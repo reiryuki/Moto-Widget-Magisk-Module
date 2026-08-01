@@ -93,10 +93,10 @@ https://t.me/ryukinotes/13
 - If you are using KernelSU, you need to disable Unmount Modules by Default in KernelSU app settings and install https://github.com/KernelSU-Modules-Repo/meta-overlayfs or https://github.com/KernelSU-Modules-Repo/magic_mount_rs or https://github.com/KernelSU-Modules-Repo/hybrid_mount or https://github.com/maxsteeel/nomount first depending on ROM compatibility
 - Install Moto Core Magisk Module first: https://github.com/reiryuki/Moto-Core-Magisk-Module
 - Download the right module file according to your Android version:
-  - Minimum SDK 30: https://devuploads.com/o2x1o5e1pj1u
-  - Minimum SDK 29: https://devuploads.com/3wh0weaiev5b
-  - Minimum SDK 28: https://devuploads.com/k5u1r9loy7eo
-  - Minimum SDK 26: https://devuploads.com/6s9xxsi78tz3
+  - Minimum SDK 30: https://bicolink.com/uvBK
+  - Minimum SDK 29: https://bicolink.com/A6rZ0XX
+  - Minimum SDK 28: https://bicolink.com/KS
+  - Minimum SDK 26: https://bicolink.com/NaxWpXutc
 - Install the module via Magisk/KernelSU/APatch/Kitsune Mask app or Recovery if Magisk or Kitsune Mask installed
 - Reboot
 - If you are using KernelSU, you need to allow superuser list manually all package name listed in package.txt (and your home launcher app also) (enable show system apps) and reboot afterwards
@@ -105,6 +105,9 @@ https://t.me/ryukinotes/13
 - Add Moto Widget to your home screen
 - You can even update Moto Widget app via Play Store if there is an update
 - If Moto Widget app does not show up in Play Store, then clear Play Store data first
+
+## Download Tutorial
+https://t.me/ryukinotes/97
 
 ## Optionals
 Global: https://t.me/ryukinotes/35
