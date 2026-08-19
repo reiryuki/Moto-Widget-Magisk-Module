@@ -95,8 +95,8 @@ https://t.me/ryukinotes/13
 - Download the right module file according to your Android version:
   - Minimum SDK 30: https://bicolink.com/uvBK
   - Minimum SDK 29: https://bicolink.com/A6rZ0XX
-  - Minimum SDK 28: https://bicolink.com/KS
-  - Minimum SDK 26: https://bicolink.com/NaxWpXutc
+  - Minimum SDK 28: (Please tell me if you need it)
+  - Minimum SDK 26: (Please tell me if you need it)
 - Install the module via Magisk/KernelSU/APatch/Kitsune Mask app or Recovery if Magisk or Kitsune Mask installed
 - Reboot
 - If you are using KernelSU, you need to allow superuser list manually all package name listed in package.txt (and your home launcher app also) (enable show system apps) and reboot afterwards
