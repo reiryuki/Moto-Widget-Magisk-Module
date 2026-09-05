@@ -177,14 +177,13 @@ if [ "$BOOTMODE" == true ]\
 fi
 # prepare
 DIR=/storage/emulated/"$UID"/Android/data/$NAME/files
+DIR2=/storage/emulated/"$UID"/Android/data/$NAME/cache
 ui_print "- Creating directories:"
 ui_print "  $DIR"
 mkdir -p $DIR
+ui_print "  $DIR2"
+mkdir -p $DIR2
 ui_print " "
-
-
-
-
 
 
 

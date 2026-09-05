@@ -15,7 +15,7 @@ https://apkmirror.com com.motorola.timeweatherwidget by Motorola Mobility LLC.
 
 v1.15
 - Update TimeWeather.apk version 4.13.306 in Minimum SDK 30 variant
-- Prepare /storage/emulated/"$UID"/Android/data/com.motorola.timeweatherwidget/files directories
+- Prepare /storage/emulated/"$UID"/Android/data/$PKG/ directories
 - Resets module folders/files permissions at post-fs-data
 - Move _uninstall.log to /data/adb/logs/
 
@@ -93,10 +93,10 @@ https://t.me/ryukinotes/13
 - If you are using KernelSU, you need to disable Unmount Modules by Default in KernelSU app settings and install https://github.com/KernelSU-Modules-Repo/meta-overlayfs or https://github.com/KernelSU-Modules-Repo/magic_mount_rs or https://github.com/KernelSU-Modules-Repo/hybrid_mount or https://github.com/maxsteeel/nomount first depending on ROM compatibility
 - Install Moto Core Magisk Module first: https://github.com/reiryuki/Moto-Core-Magisk-Module
 - Download the right module file according to your Android version:
-  - Minimum SDK 30: https://bicolink.com/uvBK
-  - Minimum SDK 29: https://bicolink.com/A6rZ0XX
-  - Minimum SDK 28: (Please tell me if you need it)
-  - Minimum SDK 26: (Please tell me if you need it)
+  - Minimum SDK 30: https://github.com/reiryuki/Moto-Widget-Magisk-Module
+  - Minimum SDK 29: https://github.com/reiryuki/Moto-Widget-Magisk-Module
+  - Minimum SDK 28: https://github.com/reiryuki/Moto-Widget-Magisk-Module
+  - Minimum SDK 26: https://github.com/reiryuki/Moto-Widget-Magisk-Module
 - Install the module via Magisk/KernelSU/APatch/Kitsune Mask app or Recovery if Magisk or Kitsune Mask installed
 - Reboot
 - If you are using KernelSU, you need to allow superuser list manually all package name listed in package.txt (and your home launcher app also) (enable show system apps) and reboot afterwards
